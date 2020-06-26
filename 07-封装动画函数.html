@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box {
+				width: 100px;
+				height: 100px;
+				background: red;
+				position: absolute;
+				left: 0;
+				top: 200px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<button>设置到400px</button>
+		<button>设置到800px</button>
+		<div id="box"></div>
+		<script type="text/javascript">
+			var btns = document.getElementsByTagName('button');
+			var box = document.getElementById('box');
+			//			var timer = 0;
+			//单击400px
+			btns[0].onclick = function() {
+				animate(box,400);
+			}
+			//单击800px
+			btns[1].onclick = function() {
+				animate(box,800);
+			}
+			
+			/**
+			 * 封装动画函数
+			 * @param {元素对象} obj
+			 * @param {目标值} target
+			 */
+			function animate(obj, target) {
+				//避免定时器累加
+				clearInterval(obj.timer);
+				obj.timer = setInterval(function() {
+					var step = 9;
+					var current = obj.offsetLeft;
+					step = target >= current ? step : -step;
+			//当目标值-当前值的差的绝对值大于等于步数的绝对值时,设置left值
+					if(Math.abs(target-current) >= Math.abs(step)) {
+						current += step;
+						obj.style.left = current + 'px';
+					} else {
+						//表示已经接近目标值,直接设置到目标值
+						obj.style.left = target +'px';
+						clearInterval(obj.timer);
+					}
+				}, 30);
+			}
+		</script>
+	</body>
+
+</html>

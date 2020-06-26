@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			.box {
+				width: 320px;
+				height: 170px;
+				/*background: pink;*/
+				margin: 100px auto 0;
+			}
+			
+			.box .addBtn {
+				width: 100px;
+				height: 30px;
+			}
+			
+			table {
+				border: 1px solid #ccc;
+				width: 320px;
+				border-spacing: 0;
+				/*1px边框*/
+				border-collapse: collapse;
+			}
+			
+			td,
+			th {
+				border: 1px solid #ccc;
+				text-align: center;
+				padding: 5px 0;
+			}
+			
+			th {
+				background: #09c;
+				color: #fff;
+			}
+			
+			.cover {
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.5);
+				position: absolute;
+				left: 0;
+				top: 0;
+				display: none;
+			}
+			
+			.dialog {
+				width: 430px;
+				height: 250px;
+				background: #fff;
+				position: absolute;
+				left: 50%;
+				margin-left: -215px;
+				top: 50%;
+				margin-top: -125px;
+				display: none;
+			}
+			
+			.dialog h3 {
+				height: 35px;
+				line-height: 35px;
+				background: #eee;
+				text-align: center;
+			}
+			
+			.dialog input {
+				width: 300px;
+				height: 30px;
+				border-radius: 3px;
+				border: 1px solid #ccc;
+			}
+			
+			.dialog div {
+				margin: 20px 0 0 20px;
+			}
+			
+			.dialog .comBtn {
+				display: block;
+				margin: 15px auto 0;
+				width: 100px;
+				height: 30px
+			}
+			
+			.dialog span {
+				position: absolute;
+				right: 5px;
+				top: 5px;
+				font-size: 20px;
+				font-weight: 700;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="box">
+			<button class="addBtn" id="addBtn">添加数据</button>
+			<table>
+				<thead>
+					<tr>
+						<th>电影名称</th>
+						<th>领衔主演</th>
+						<th>已完成</th>
+					</tr>
+				</thead>
+				<tbody id="tbody">
+					<tr>
+						<td>老师好</td>
+						<td>于谦</td>
+						<td>
+							<a href="##">删除</a>
+						</td>
+					</tr>
+					<tr>
+						<td>飞驰人生</td>
+						<td>沈腾</td>
+						<td>
+							<a href="##">删除</a>
+						</td>
+					</tr>
+					<tr>
+						<td>流浪地球</td>
+						<td>吴京</td>
+						<td>
+							<a href="##">删除</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="cover" id="cover"></div>
+		<div class="dialog" id="dialog">
+			<h3>添加数据</h3>
+			<div>
+				<label for="txt1">电影名称:</label>
+				<input type="text" placeholder="请输入电影名称" id="txt1" />
+			</div>
+			<div>
+				<label for="txt2">领衔主演:</label>
+				<input type="text" value="苍老师" id="txt2" />
+			</div>
+			<button class="comBtn" id="comBtn">完成</button>
+			<span class="close" id="close">X</span>
+		</div>
+		<script type="text/javascript">
+			//获取tbody
+			var tbody = document.getElementById('tbody');
+			//获取添加按钮
+			var addBtn = document.getElementById('addBtn');
+			//获取cover
+			var cover = document.getElementById('cover');
+			//获取dialog
+			var dialog = document.getElementById('dialog');
+			//获取完成按钮
+			var comBtn = document.getElementById('comBtn');
+			//获取txt1
+			var txt1 = document.getElementById('txt1');
+			//获取txt2
+			var txt2 = document.getElementById('txt2');
+			//获取close
+			var close = document.getElementById('close');
+			//循环绑定a标签
+//			for(var i = 0; i < tbody.children.length; i++) {
+//				//每行
+//				var tr = tbody.children[i];
+//				//每行中的a,数组[0]
+//				var a = tr.getElementsByTagName('a')[0];
+//				console.log(a);
+//				a.onclick = function() {
+//					//					alert(1);
+//					//单击a,删除tr(),a父节点的父节点
+//					tbody.removeChild(this.parentElement.parentElement);
+//
+//				}
+//			}
+			//单击tbody
+			tbody.onclick = function(e){
+				if(e.target.nodeName == 'A'){
+					this.removeChild(e.target.parentElement.parentElement);
+				}
+			}
+
+			//单击添加数据
+			addBtn.onclick = function() {
+				//显示cover
+				cover.style.display = 'block';
+				//显示dialog
+				dialog.style.display = 'block';
+			}
+
+			//单击完成按钮
+			comBtn.onclick = function() {
+				//获取txt1,内容
+				var str1 = txt1.value.trim();
+				//获取txt2,内容
+				var str2 = txt2.value.trim();
+				//if(str1 != '' && str2 != '')
+				if(str1 && str2 ) {
+					//隐藏cover
+					cover.style.display = 'none';
+					//隐藏dialog
+					dialog.style.display = 'none';
+					//创建tr
+					var tr = document.createElement('tr');
+					tbody.appendChild(tr);
+					//循环创建3个td
+					for(var i = 0; i < 3; i++) {
+						//创建td对象元素
+						var td = document.createElement('td');
+						//将td追加到tr中
+						tr.appendChild(td);
+						if(i == 0) {
+							//将电影名称赋值给第1个td
+							td.innerText = str1;
+						} else if(i == 1) {
+							//将领衔主演赋值给第2个td
+							td.innerText = str2;
+						} else {
+							//创建a标签
+							var a = document.createElement('a');
+							a.href = '##';
+							a.innerText = '删除';
+//							//绑定单击事件
+//							a.onclick = function() {
+//								//单击a,删除tr(),a父节点的父节点
+//								tbody.removeChild(this.parentElement.parentElement);
+//							}
+							//将a追加到td
+							td.appendChild(a);
+						}
+					}
+					//清空
+					txt1.value = '';
+					txt2.value = '张瑶';
+				}else{
+					alert('电影名称和领衔主演不能为空');
+				}
+			}
+			//单击关闭
+			close.onclick = function(){
+				    //隐藏cover
+					cover.style.display = 'none';
+					//隐藏dialog
+					dialog.style.display = 'none';
+			}
+		</script>
+	</body>
+
+</html>

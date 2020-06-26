@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<button id="btn">按钮</button>
+		<script type="text/javascript">
+			var btn = document.getElementById('btn');
+			
+			btn.onclick = function(e){
+//				console.log(e);
+//				console.log(window.event);
+//				if(e){
+//					console.log(e);
+//				}else{
+//					console.log(window.event);
+//				}
+//				var obj = e || window.event;
+//				console.log(obj);
+//				if(obj.target){
+//					
+//				}
+				//var e	
+				var e = e || window.event;
+				console.log(e);
+			}
+		</script>
+	</body>
+</html>

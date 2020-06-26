@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			.header {
+				height: 800px;
+				background: pink;
+			}
+			
+			.nav {
+				width:100%;
+				height: 50px;
+				background: greenyellow;
+			}
+			
+			.main {
+				width: 1000px;
+				background: blue;
+				height: 200px;
+				margin: 10px auto 0;
+			}
+			.pof{
+				position: fixed;
+				left:0;
+				top:0;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="header" id="header"></div>
+		<div class="nav" id="nav"></div>
+		<div class="main"></div>
+		<div class="main"></div>
+		<div class="main"></div>
+		<div class="main"></div>
+		<div class="main"></div>
+		<div class="main"></div>
+		<div class="main"></div>
+		<div class="main"></div>
+		<div class="main"></div>
+		<script type="text/javascript">
+			var nav = document.getElementById('nav');
+			var header = document.getElementById('header');
+		
+			//窗口滚动事件
+			window.onscroll = function() {
+				//				var top = window.scrollTop || document.documentElement.scrollTop ||document.body.scrollTop;
+				//				console.log(top);
+//				console.log(getScroll()[0]);
+				//console.log(getScroll().top);
+				
+				//当垂直滚动的距离大于等于header的高度
+				if(getScroll().top >= header.offsetHeight){
+					nav.className = 'nav pof';
+				}else{
+					nav.className = 'nav';
+				}
+			}
+
+			//由于每个浏览器对于获取页面滚动距离的方式不一样,所以需要兼容获取
+
+			//封装获取scrollLeft和scrollTop
+			function getScroll() {
+				//第一种方式:
+//				var top = window.scrollTop || document.documentElement.scrollTop || document.body.scrollTop;
+//				var left = window.scrollLeft || document.documentElement.scrollLeft || document.body.scrollLeft;
+//				return [top,left];
+
+				//第二种:
+//				var top = window.scrollTop || document.documentElement.scrollTop || document.body.scrollTop;
+//				var left = window.scrollLeft || document.documentElement.scrollLeft || document.body.scrollLeft;
+//				
+//				var obj = {
+//					top:top,
+//					left:left
+//				};
+//				return obj;
+				//第三种
+				return {
+					left : window.scrollLeft || document.documentElement.scrollLeft || document.body.scrollLeft,
+					top : window.scrollTop || document.documentElement.scrollTop || document.body.scrollTop
+				};
+			}
+		</script>
+	</body>
+
+</html>

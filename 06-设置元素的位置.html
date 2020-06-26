@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box{
+				width: 100px;
+				height: 100px;
+				background: red;
+				position: absolute;
+				left:0;
+				top:200px;
+			}
+		</style>
+	</head>
+	<body>
+		<button>设置到400px</button>
+		<button>设置到800px</button>
+		<div id="box"></div>
+		<script type="text/javascript">
+			var btns = document.getElementsByTagName('button');
+			var box = document.getElementById('box');
+			var timer = 0;
+			//单击400px
+			btns[0].onclick = function(){
+				timer = setInterval(function(){
+					var step = 9;
+					var current = box.offsetLeft;
+					current+=step;
+					if(current <= 400){
+						box.style.left = current+'px';
+					}else{
+						clearInterval(timer);
+					}
+				},30);
+			}
+			//单击800px
+			btns[1].onclick = function(){
+				timer = setInterval(function(){
+					var step = 10;
+					var current = box.offsetLeft;
+					current+=step;
+					if(current <= 800){
+						box.style.left = current+'px';
+					}else{
+						clearInterval(timer);
+					}
+				},30);
+			}
+		</script>
+	</body>
+</html>
